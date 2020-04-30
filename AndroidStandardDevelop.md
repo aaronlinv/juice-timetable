@@ -986,7 +986,24 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
 程序中使用单词缩写原则：不要用缩写，除非该缩写是约定俗成的。
 
 
+
 ## 参考
+
+[Android 包命名规范][Android 包命名规范]
+
+[Android 开发最佳实践][Android 开发最佳实践]
+
+[Android 编码规范][Android 编码规范]
+
+[阿里巴巴 Java 开发手册][阿里巴巴 Java 开发手册]
+
+[Project and code style guidelines][Project and code style guidelines]
+
+[Google Java 编程风格指南][Google Java 编程风格指南]
+
+[小细节，大用途，35 个 Java 代码性能优化总结！][小细节，大用途，35 个 Java 代码性能优化总结！]
+
+
 
 [Package by features, not layers]: https://medium.com/@cesarmcferreira/package-by-features-not-layers-2d076df1964d#.mp782izhh
 [todo-mvp]: https://github.com/googlesamples/android-architecture/tree/todo-mvp/
