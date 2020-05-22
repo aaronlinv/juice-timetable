@@ -29,6 +29,25 @@ Git相关
 1. fork仓库，master分支为产品分支，dev分支为开发分支，应在dev分支或新建分支上进行开发
 2. 提交代码，commit信息必须有意义，提交前必须Optimize imports和Reformat code
 3. 提交代码后向上游参考发起PR，Aaron对代码进行审核，通过后合并入dev分支
+4. Commit 日志规范
+提交信息一定要认真填写！
+建议参考规范：(scope)：
+
+        比如：fix(首页模块)：修复弹窗 JS Bug。
+
+        type 表示 动作类型，可分为：
+
+        fix：修复 xxx Bug
+
+        feat：新增 xxx 功能
+
+        test：调试 xxx 功能
+
+        style：变更 xxx 代码格式或注释
+
+        docs：变更 xxx 文档
+
+        refactor：重构 xxx 功能或方法
 
 
 
@@ -142,7 +161,6 @@ static final Logger logger = Logger.getLogger(MyClass.getName());
 static final String[] nonEmptyArray = {"these", "can", "change"};
 ```
 
-
 #### 3.5 非常量字段名
 
 非常量字段名以 `lowerCamelCase` 风格的基础上改造为如下风格：基本结构为 `scope{Type0}VariableName{Type1}`、`type0VariableName{Type1}`、`variableName{Type1}`。
@@ -169,7 +187,6 @@ public class MyClass {
 
 使用 1 个字符前缀来表示作用范围，1 个字符的前缀必须小写，前缀后面是由表意性强的一个单词或多个单词组成的名字，而且每个单词的首写字母大写，其它字母小写，这样保证了对变量名能够进行正确的断句。
 
-!!!!!!!!!!!!!!!!!!!
 ##### 3.5.2 Type0（控件类型）
 
 | 名称           | 缩写 |
@@ -196,7 +213,6 @@ public class MyClass {
 | WebView        | wv   |
 
 
-!!!!!!!!!!!!!!!!!!!!
 ##### 3.5.3 VariableName（变量名）
 
 变量名中可能会出现量词，我们需要创建统一的量词。
@@ -237,16 +253,6 @@ public class MyClass {
 
 临时变量通常被取名为 `i`、`j`、`k`、`m` 和 `n`，它们一般用于整型；`c`、`d`、`e`，它们一般用于字符型。 如：`for (int i = 0; i < len; i++)`。
 
-!!!!!!!!!!!!!!!!!!!
-#### 3.9 类型变量名
-
-类型变量可用以下两种风格之一进行命名：
-
-1. 单个的大写字母，后面可以跟一个数字（如：`E`, `T`, `X`, `T2`）。
-2. 以类命名方式（参考[3.2 类名](#32-类名)），后面加个大写的 T（如：`RequestT`, `FooBarT`）。
-
-更多还可参考：**[阿里巴巴 Java 开发手册][阿里巴巴 Java 开发手册]**
-
 
 ### 4 代码样式规范
 
@@ -275,7 +281,7 @@ if (condition) {
     body();
 }
 ```
-!!!!!!!!!!!!!!!!!!!!
+
 #### 4.2 编写简短方法
 
 
@@ -474,31 +480,6 @@ loadPicture(context,
         ivAvatar,
         "Avatar of the user",
         clickListener);
-```
-
-????????????????????????
-##### 4.7.1.4 RxJava 链式的换行
-
-RxJava 的每个操作符都需要换新行，并且把换行符插入在 `.` 之前。
-
-例如：
-
-```java
-public Observable<Location> syncLocations() {
-    return mDatabaseHelper.getAllLocations()
-            .concatMap(new Func1<Location, Observable<? extends Location>>() {
-                @Override
-                 public Observable<? extends Location> call(Location location) {
-                     return mRetrofitService.getLocation(location.id);
-                 }
-            })
-            .retry(new Func2<Integer, Throwable, Boolean>() {
-                 @Override
-                 public Boolean call(Integer numRetries, Throwable throwable) {
-                     return throwable instanceof RetrofitError;
-                 }
-            });
-}
 ```
 
 
@@ -755,11 +736,11 @@ compileSdkVersion 29
 如果是开发多个系统级别的应用，当多个应用同时用到相同的 `so` 库时，一定要确保 `so` 库的版本一致，否则可能会引发应用崩溃。
 
 
-### 8 注释规范
+### 7 注释规范
 
 为了减少他人阅读你代码的痛苦值，请在关键地方做好注释。
 
-#### 8.1 类注释
+#### 7.1 类注释
 
 每个类完成后应该有作者姓名和联系方式的注释，对自己的代码负责。
 
@@ -794,7 +775,7 @@ public class WelcomeActivity {
 
 这样便可在每次新建类的时候自动加上该头注释。
 
-#### 8.2 方法注释
+#### 7.2 方法注释
 
 每一个成员方法（包括自定义成员方法、覆盖方法、属性方法）的方法头都必须做方法头注释，在方法前一行输入 `/** + 回车` 或者设置 `Fix doc comment`（Settings -> Keymap -> Fix doc comment）快捷键，AS 便会帮你生成模板，我们只需要补全参数即可，如下所示。
 
@@ -815,7 +796,7 @@ public static byte[] bitmap2Bytes(Bitmap bitmap, CompressFormat format) {
 ```
 
 
-#### 8.3 块注释
+#### 7.3 块注释
 
 块注释与其周围的代码在同一缩进级别。它们可以是 `/* ... */` 风格，也可以是 `// ...` 风格（**`//` 后最好带一个空格**）。对于多行的 `/* ... */` 注释，后续行必须从 `*` 开始， 并且与前一行的 `*` 对齐。以下示例注释都是 OK 的。
 
@@ -835,7 +816,7 @@ public static byte[] bitmap2Bytes(Bitmap bitmap, CompressFormat format) {
 注释不要封闭在由星号或其它字符绘制的框架里。
 
 
-#### 8.4 其他一些注释
+#### 7.4 其他一些注释
 
 AS 已帮你集成了一些注释模板，我们只需要直接使用即可，在代码中输入 `todo`、`fixme` 等这些注释模板，回车后便会出现如下注释。
 
@@ -844,11 +825,11 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
 // FIXME: 17/3/14 需要修正，甚至代码是错误的，不能工作，需要修复的说明
 ```
 
-### 9 测试规范
+### 8 测试规范
 
 业务开发完成之后，开发人员做单元测试，单元测试完成之后，保证单元测试全部通过，同时单元测试代码覆盖率达到一定程度（这个需要开发和测试约定，理论上越高越好），开发提测。
 
-#### 9.1 单元测试
+#### 8.1 单元测试
 
 测试类的名称应该是所测试类的名称加 `Test`，我们创建 `DatabaseHelper` 的测试类，其名应该叫 `DatabaseHelperTest`。
 
@@ -857,12 +838,11 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
 * 模板：`void methodName 前提条件和预期结果()`
 * 例子：`void signInWithEmptyEmailFails()`
 
-#### 9.2 Espresso 测试
+#### 8.2 Espresso 测试
 
 每个 Espresso 测试通常是针对 `Activity`，所以其测试名就是其被测的 `Activity` 的名称加 `Test`，比如 `SignInActivityTest`。
 
-?????????????
-### 10 其他的一些规范
+### 9 其他的一些规范
 
 1. 合理布局，有效运用 `<merge>`、`<ViewStub>`、`<include>` 标签；
 
@@ -880,17 +860,11 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
 
 8. 提取方法，去除重复代码。对于必要的工具类抽取也很重要，这在以后的项目中是可以重用的。
 
-9. 可引入 `Dagger2` 减少模块之间的耦合性。`Dagger2` 是一个依赖注入框架，使用代码自动生成创建依赖关系需要的代码。减少很多模板化的代码，更易于测试，降低耦合，创建可复用可互换的模块；
+9. 尽可能使用局部变量；
 
-10. 项目引入 `RxAndroid` 响应式编程，可以极大的减少逻辑代码；
+10. 及时关闭流；
 
-11. 通过引入事件总线，如：`EventBus`、`AndroidEventBus`、`RxBus`，它允许我们在 `DataLayer` 中发送事件，以便 `ViewLayer` 中的多个组件都能够订阅到这些事件，减少回调；
-
-12. 尽可能使用局部变量；
-
-13. 及时关闭流；
-
-14. 尽量减少对变量的重复计算；
+11. 尽量减少对变量的重复计算；
 
     如下面的操作：
 
@@ -908,7 +882,7 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
     }
     ```
 
-15. 尽量采用懒加载的策略，即在需要的时候才创建；
+12. 尽量采用懒加载的策略，即在需要的时候才创建；
 
     例如：
 
@@ -928,13 +902,13 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
     }
     ```
 
-16. 不要在循环中使用 `try…catch…`，应该把其放在最外层；
+13. 不要在循环中使用 `try…catch…`，应该把其放在最外层；
 
-17. 使用带缓冲的输入输出流进行 IO 操作；
+14. 使用带缓冲的输入输出流进行 IO 操作；
 
-18. 尽量使用 `HashMap`、`ArrayList`、`StringBuilder`，除非线程安全需要，否则不推荐使用 `HashTable`、`Vector`、`StringBuffer`，后三者由于使用同步机制而导致了性能开销；
+15. 尽量使用 `HashMap`、`ArrayList`、`StringBuilder`，除非线程安全需要，否则不推荐使用 `HashTable`、`Vector`、`StringBuffer`，后三者由于使用同步机制而导致了性能开销；
 
-19. 尽量在合适的场合使用单例；
+16. 尽量在合适的场合使用单例；
 
     使用单例可以减轻加载的负担、缩短加载的时间、提高加载的效率，但并不是所有地方都适用于单例，简单来说，单例主要适用于以下三个方面：
 
@@ -944,11 +918,11 @@ AS 已帮你集成了一些注释模板，我们只需要直接使用即可，�
 
     3. 控制数据的共享，在不建立直接关联的条件下，让多个不相关的进程或线程之间实现通信。
 
-20. 把一个基本数据类型转为字符串，`基本数据类型.toString()` 是最快的方式，`String.valueOf(数据)` 次之，`数据 + ""` 最慢；
+17. 把一个基本数据类型转为字符串，`基本数据类型.toString()` 是最快的方式，`String.valueOf(数据)` 次之，`数据 + ""` 最慢；
 
-21. 使用 AS 自带的 Lint 来优化代码结构（什么，你不会？右键 module、目录或者文件，选择 Analyze -> Inspect Code）；
+18. 使用 AS 自带的 Lint 来优化代码结构（什么，你不会？右键 module、目录或者文件，选择 Analyze -> Inspect Code）；
 
-22. 最后不要忘了内存泄漏的检测；
+19. 最后不要忘了内存泄漏的检测；
 
 ## 附录
 
